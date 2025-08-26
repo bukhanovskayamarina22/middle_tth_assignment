@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:middle_tth_assignment/constants.dart';
 
 class AssetResponse {
   final String id;
@@ -23,7 +24,9 @@ class Asset {
   Asset({required this.id, required this.name, required this.priceUsd, required this.color});
 
   factory Asset.fromResponse(AssetResponse res) {
-    final generatedColor = 'FF${Random().nextInt(16777216).toRadixString(16)}';
+    // случайное число от 0 до 16777215 конвертируется в 16-ричное число,
+    // добавляется 100% насыщенность, парсится в цвет
+    final generatedColor = 'FF${Random().nextInt(ColorConstants.colorsRange).toRadixString(16)}';
     return Asset(
       id: res.id,
       name: res.name,

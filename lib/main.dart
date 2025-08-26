@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider<AssetsBloc>(
       create: (context) => AssetsBloc(apiService: ApiService())..add(LoadAssets()),
       child: MaterialApp(
-        title: 'Middle TTH Assignment',
+        title: TextConstants.appName,
         theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple)),
         home: const MainPage(),
       ),
@@ -70,12 +70,12 @@ class _MainPageState extends State<MainPage> {
               List<Asset> assets;
               if (state is Loaded) {
                 assets = state.assets;
-              } else if (state is LoadingMore) {
+              } else if (state is LoadedMore) {
                 assets = state.assets;
               } else if (state is AssetsError) {
                 assets = state.assets;
               } else {
-                assets = <Asset>[];
+                assets = [];
               }
 
               return NotificationListener<ScrollNotification>(
@@ -113,7 +113,7 @@ class CoinTile extends StatelessWidget {
       fontSize: 17,
       height: 24 / 17,
       letterSpacing: -0.41,
-      color: Color(0xFF17171A),
+      color: Color(ColorConstants.textColor),
     );
     return SizedBox(
       height: 84,

@@ -15,7 +15,7 @@ class DioService {
 
   Future<Map<String, dynamic>> get(String endpoint, Map<String, dynamic> queryMap) async {
     try {
-      queryMap[ApiConstants.apiKey] = 'ca11fba96860735f326bd400e11be1036b8f4b5ce167ce355ec10c582fc68808';
+      queryMap[ApiConstants.apiKey] = ApiConstants.apiKeyValue;
       final query =
           '?${queryMap.entries.map((entry) {
             return '${entry.key}=${entry.value}';
