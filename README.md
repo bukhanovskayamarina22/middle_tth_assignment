@@ -1,16 +1,22 @@
 # middle_tth_assignment
+Middle Flutter Developer Take-To-Home assignment
 
-A new Flutter project.
+[the assignment](https://docs.google.com/document/d/1YNYYau6YO1RCf_p_hGypc0YvEvrQ9R1dIoaz1SGJAtM/edit?tab=t.0)
 
-## Getting Started
+## Architectural Overview
 
-This project is a starting point for a Flutter application.
+- **Data layer**:
+  - _Http_: `dio`
+    Interacts with the `rest.coincap.io/v3/`, gets assets page by page
+- **Logic layer**: `bloc`
+  `AssetsBloc` interacts with the API, fetches data and manages pagination
+- **Presentation layer**
+  Displays assets in a List, interacts with AssetsBloc
+    
+## Choice of technologies
+- `dio`: requirement
+- `bloc`: Enforces a certain type of architecture. Event-driven (separates presentation from logic).
 
-A few resources to get you started if this is your first Flutter project:
+## Some other code choices
+A lot of design choices in this project were motivated by the fact that this is a small one-day application without any prospects of further development. This is the reason why I deliberately desided to not separate the Presentation layer into multiple files and to not include localization and interfaces.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
