@@ -41,60 +41,55 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: RefreshIndicator(
-        onRefresh: () async {
-          context.read<AssetsBloc>().add(const RefreshAssets());
-        },
-        child: Center(
-          child: BlocBuilder<AssetsBloc, AssetsState>(
-            builder: (context, state) {
-              if (state is Initial || state is Loading) {
-                return const Center(child: CircularProgressIndicator());
-              }
+      body: Center(
+        child: BlocBuilder<AssetsBloc, AssetsState>(
+          builder: (context, state) {
+            if (state is Initial || state is Loading) {
+              return const Center(child: CircularProgressIndicator());
+            }
 
-              if (state is AssetsError && state.assets.isEmpty) {
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('${TextConstants.error}${state.message}'),
-                      ElevatedButton(
-                        onPressed: () => context.read<AssetsBloc>().add(const LoadAssets()),
-                        child: const Text(TextConstants.retry),
-                      ),
-                    ],
-                  ),
-                );
-              }
-
-              List<Asset> assets;
-              if (state is Loaded) {
-                assets = state.assets;
-              } else if (state is LoadedMore) {
-                assets = state.assets;
-              } else if (state is AssetsError) {
-                assets = state.assets;
-              } else {
-                assets = [];
-              }
-
-              return NotificationListener<ScrollNotification>(
-                onNotification: (notification) {
-                  if (notification.metrics.atEdge && notification.metrics.pixels != 0) {
-                    context.read<AssetsBloc>().add(LoadNextPage());
-                  }
-                  return true;
-                },
-                child: ListView.builder(
-                  itemCount: assets.length,
-                  itemBuilder: (context, index) {
-                    final asset = assets[index];
-                    return CoinTile(key: UniqueKey(), asset: asset);
-                  },
+            if (state is AssetsError && state.assets.isEmpty) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('${TextConstants.error}${state.message}'),
+                    ElevatedButton(
+                      onPressed: () => context.read<AssetsBloc>().add(const LoadAssets()),
+                      child: const Text(TextConstants.retry),
+                    ),
+                  ],
                 ),
               );
-            },
-          ),
+            }
+
+            List<Asset> assets;
+            if (state is Loaded) {
+              assets = state.assets;
+            } else if (state is LoadedMore) {
+              assets = state.assets;
+            } else if (state is AssetsError) {
+              assets = state.assets;
+            } else {
+              assets = [];
+            }
+
+            return NotificationListener<ScrollNotification>(
+              onNotification: (notification) {
+                if (notification.metrics.atEdge && notification.metrics.pixels != 0) {
+                  context.read<AssetsBloc>().add(LoadNextPage());
+                }
+                return true;
+              },
+              child: ListView.builder(
+                itemCount: assets.length,
+                itemBuilder: (context, index) {
+                  final asset = assets[index];
+                  return CoinTile(key: UniqueKey(), asset: asset);
+                },
+              ),
+            );
+          },
         ),
       ),
     );

@@ -8,10 +8,12 @@ class ApiConstants {
 }
 
 class TextConstants {
+  static const String appName = 'Middle TTH Assignment';
   static const String error = 'Error: ';
   static const String retry = 'Retry';
 }
 
 class ColorConstants {
-  static const int
+  static const int colorsRange = 16777216;
+  static const int textColor = 0xFF17171A;
 }

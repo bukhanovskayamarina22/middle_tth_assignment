@@ -16,11 +16,11 @@ class Loading extends AssetsState {
   const Loading();
 }
 
-class LoadingMore extends AssetsState {
+class LoadedMore extends AssetsState {
   final List<Asset> assets;
   final int currentPage;
 
-  const LoadingMore({required this.assets, required this.currentPage});
+  const LoadedMore({required this.assets, required this.currentPage});
 
   @override
   List<Object> get props => [assets, currentPage];

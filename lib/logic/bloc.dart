@@ -11,14 +11,9 @@ class AssetsBloc extends Bloc<AssetsEvent, AssetsState> {
   AssetsBloc({required ApiService apiService}) : _apiService = apiService, super(const Initial()) {
     on<LoadAssets>(_onLoadAssets);
     on<LoadNextPage>(_onLoadNextPage);
-    on<RefreshAssets>(_onRefresh);
   }
 
   Future<void> _onLoadAssets(LoadAssets event, Emitter<AssetsState> emit) async {
-    await _loadAssets(emit);
-  }
-
-  Future<void> _onRefresh(RefreshAssets event, Emitter<AssetsState> emit) async {
     await _loadAssets(emit);
   }
 
